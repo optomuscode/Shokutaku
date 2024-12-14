@@ -29,13 +29,14 @@
 <body>
   <!-- Navigation Bar -->
   <nav>
-    <% if user_signed_in? %>
-      <p>Welcome, <%= current_user.email %></p>
-      <%= link_to 'Logout', logout_path %>
-    <% else %>
-      <%= link_to 'Sign Up', new_user_registration_path %>
-      <%= link_to 'Log In', new_user_session_path %>
-    <% end %>
+  <% if user_signed_in? %>
+    <p>Welcome, <%= current_user.name || current_user.email %></p>
+    <%= link_to 'Edit Profile', edit_user_registration_path %>
+    <%= link_to 'Logout', logout_path %>
+  <% else %>
+    <%= link_to 'Sign Up', new_user_registration_path %>
+    <%= link_to 'Log In', new_user_session_path %>
+  <% end %>
   </nav>
 
   <!-- Flash Messages -->

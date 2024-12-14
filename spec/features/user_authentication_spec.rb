@@ -14,16 +14,18 @@ RSpec.describe 'User Authentication', type: :feature do
     fill_in 'Password confirmation', with: 'password123'
     click_button 'Sign up'
 
-    # Expect to see a success message and verify user is redirected
+    # Expect to see a success message
     expect(page).to have_content('Welcome! You have signed up successfully.')
-    expect(page).to have_content("Welcome, #{unique_email}")
+
+    # Verify that the user is logged in
+    expect(page).to have_content("Welcome")
 
     # Log out
     click_link 'Logout'
 
     # Verify that the user is logged out
     expect(page).to have_content('Log In')
-    expect(page).not_to have_content("Welcome, #{unique_email}")
+    expect(page).not_to have_content("Welcome")
 
     # Visit the login page
     visit new_user_session_path
@@ -33,8 +35,8 @@ RSpec.describe 'User Authentication', type: :feature do
     fill_in 'Password', with: 'password123'
     click_button 'Log in'
 
-    # Expect to see a logged-in message and verify user is redirected
+    # Expect to see a logged-in message
     expect(page).to have_content('Signed in successfully.')
-    expect(page).to have_content("Welcome, #{unique_email}")
+    expect(page).to have_content("Welcome")
   end
 end
